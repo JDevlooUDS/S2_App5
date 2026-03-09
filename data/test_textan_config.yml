@@ -13,7 +13,7 @@
 #
 
 # Répertoire d'auteurs et de leurs textes
-d: TextesPourVerif
+d: TextesPourEtudiants
 
 # Indication que la ponctuation doit être éliminée
 noPonc: False
@@ -50,7 +50,7 @@ e: etudiants_sol.txt
 
 # Nom du répertoire qui comprend le ou les textes inconnus
 #  (chemin par rapport au répertoire où se déroule l'exécution)
-f_dir: Inconnus2
+f_dir: Inconnus_problematique
 
 # Nom du fichier inconnu (unique) à identifier
 # Ce fichier doit se trouver dans le répertoire indiqué par le paramètre f_dir

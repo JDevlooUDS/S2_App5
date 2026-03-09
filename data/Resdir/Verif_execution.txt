@@ -1,20 +1,77 @@
->>>------------>>> sol <<<----------------<<<
-	Tentative de chargement du code textan_sol.py
+>>>------------>>> devj1244 <<<----------------<<<
+	Tentative de chargement du code textan_devj1244.py
+	Chargement réussi en 0.09 secondes
+
+	Appel de la méthode Textan.analyze(): Extraction des n-grammes
+	Analyse terminée en 0.00 secondes
+
+	Appel de la méthode Textan.gen_text_dict(): Création de texte aléatoire suivant le style d'un auteur: Génération d'un texte aléatoire
+	cip:  devj1244 - Création de texte aléatoire, vérification à l'aide du code de devj1244
+	╒══════════╤════════╤══════════════════════════╤══════════╤═════════╤════════════╤═══════════╤═════════╤═══════════╤══════════════╕
+	│ Auteur   │   Mots │ Fichier généré           │ Vérif    │   Vérif │      Vérif │     Vérif │   Vérif │     Vérif │        Vérif │
+	│          │        │                          │ Auteur   │    Mots │   Ngrammes │   Score Z │    Prox │   Moyenne │   Écart type │
+	│          │        │                          │          │         │   Inconnus │           │         │           │              │
+	│          │        │                          │          │         │        (%) │           │         │           │              │
+	╞══════════╪════════╪══════════════════════════╪══════════╪═════════╪════════════╪═══════════╪═════════╪═══════════╪══════════════╡
+	│ Balzac   │  10000 │ _devj1244_Balzac_2026... │ --       │       0 │          0 │         0 │       0 │         0 │            1 │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Hugo     │  10000 │ _devj1244_Hugo_2026-0... │ --       │       0 │          0 │         0 │       0 │         0 │            1 │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Se╠ügur  │  10000 │ _devj1244_Se╠ügur_202... │ --       │       0 │          0 │         0 │       0 │         0 │            1 │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Verne    │  10000 │ _devj1244_Verne_2026-... │ --       │       0 │          0 │         0 │       0 │         0 │            1 │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Voltaire │  10000 │ _devj1244_Voltaire_20... │ --       │       0 │          0 │         0 │       0 │         0 │            1 │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Zola     │  10000 │ _devj1244_Zola_2026-0... │ --       │       0 │          0 │         0 │       0 │         0 │            1 │
+	╘══════════╧════════╧══════════════════════════╧══════════╧═════════╧════════════╧═══════════╧═════════╧═══════════╧══════════════╛
+	Génération de texte terminée en 0.03 secondes
+
+	Appel de la méthode Textan.find(): Détection d'un auteur inconnu
+	cip: devj1244 - Calcul des fréquences (et auteurs possibles) pour une ou plusieurs oeuvres inconnues
+		--> Probabilité de bon choix selon la cote Z: 2: 97.7%, 1.5: 93.3%, 1.0: 84.1%, 0.5: 69.2%, 0: 50%, -0.5: 30.8%
+	╒═══════════════════╤══════════════════╤═══════════════════╕
+	│ Fichier inconnu   │ Auteur 1 :       │ Auteur 2 :        │
+	│                   │  Cote Z          │  Cote Z           │
+	╞═══════════════════╪══════════════════╪═══════════════════╡
+	│ Inconnu_1.txt     │ Premier_auteur : │ Deuxième_auteur : │
+	│                   │  1.00            │  -1.00            │
+	├───────────────────┼──────────────────┼───────────────────┤
+	│ Inconnu_2.txt     │ Premier_auteur : │ Deuxième_auteur : │
+	│                   │  1.00            │  -1.00            │
+	├───────────────────┼──────────────────┼───────────────────┤
+	│ Inconnu_3.txt     │ Premier_auteur : │ Deuxième_auteur : │
+	│                   │  1.00            │  -1.00            │
+	├───────────────────┼──────────────────┼───────────────────┤
+	│ Inconnu_4.txt     │ Premier_auteur : │ Deuxième_auteur : │
+	│                   │  1.00            │  -1.00            │
+	├───────────────────┼──────────────────┼───────────────────┤
+	│ Inconnu_5.txt     │ Premier_auteur : │ Deuxième_auteur : │
+	│                   │  1.00            │  -1.00            │
+	├───────────────────┼──────────────────┼───────────────────┤
+	│ Inconnu_6.txt     │ Premier_auteur : │ Deuxième_auteur : │
+	│                   │  1.00            │  -1.00            │
+	╘═══════════════════╧══════════════════╧═══════════════════╛
+	Fin du calcul de détection d'auteur inconnu en 0.01 secondes
+
+	Appel de la méthode Textan.get_kth_ngram(): Détection du k-ième n-gramme le plus fréquent
+	cip: devj1244 - Calcul du 25e 4-gramme le plus fréquent
 ======================================================================================================================================================
-	cip: ===>>> ERREUR D'EXÉCUTION
-Exception: <class 'ModuleNotFoundError'> , Valeur: No module named 'textan_sol' , Trace: <traceback object at 0x000001FA44032180>
+	cip:devj1244 ===>>> ERREUR D'EXÉCUTION
+Exception: <class 'TypeError'> , Valeur: 'in <string>' requires string as left operand, not list , Trace: <traceback object at 0x000002263DEE3CC0>
 Ligne: 792
   File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan.py", line 792, in main
     tta.command.exec_operations(cip)
   File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan_command.py", line 101, in exec_operations
     did_something = operation.run_op(cip)
                     ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan_command.py", line 74, in run_op
-    self.exec_func(cip)
-  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan.py", line 250, in load_cip_code
-    self.import_textan_cip(
-  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan.py", line 212, in import_textan_cip
-    self.textan_module = importlib.import_module(textan_name)
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan_command.py", line 76, in run_op
+    self.exec_func()
+  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan.py", line 533, in get_kth_ngram
+    frequency = 100 * self.textan.get_ngram_occurrence(auteur, kth_ngram[0]) / total_frequency
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\textan_devj1244.py", line 238, in get_ngram_occurrence
+    if ngram in word:
+       ^^^^^^^^^^^^^
 
 ======================================================================================================================================================
