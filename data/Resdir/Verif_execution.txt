@@ -1,0 +1,20 @@
+>>>------------>>> sol <<<----------------<<<
+	Tentative de chargement du code textan_sol.py
+======================================================================================================================================================
+	cip: ===>>> ERREUR D'EXÉCUTION
+Exception: <class 'ModuleNotFoundError'> , Valeur: No module named 'textan_sol' , Trace: <traceback object at 0x000001FA44032180>
+Ligne: 792
+  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan.py", line 792, in main
+    tta.command.exec_operations(cip)
+  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan_command.py", line 101, in exec_operations
+    did_something = operation.run_op(cip)
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan_command.py", line 74, in run_op
+    self.exec_func(cip)
+  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan.py", line 250, in load_cip_code
+    self.import_textan_cip(
+  File "C:\Users\jerem\Documents\Universite\Session2\App5\S2_App5\src\test_textan.py", line 212, in import_textan_cip
+    self.textan_module = importlib.import_module(textan_name)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+======================================================================================================================================================

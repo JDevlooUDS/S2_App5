@@ -36,7 +36,7 @@
 """
 import io
 from typing import TextIO
-# import math  # Au besoin, retirer le commentaire de cette ligne
+import math  # Au besoin, retirer le commentaire de cette ligne
 # import random # Au besoin, retirer le commentaire de cette ligne
 from textan_common import TextAnCommon
 
@@ -93,8 +93,9 @@ class TextAn(TextAnCommon):
         """
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        print(dict_de_ngrams)
-        taille = 1.0
+        taille = 0.0
+        taille += TextAn.dot_product_dict(dict_de_ngrams, dict_de_ngrams)
+        taille = math.sqrt(taille)
         return taille
 
     def normalize_vector(self, dict_de_ngrams: dict) -> dict:
@@ -110,9 +111,10 @@ class TextAn(TextAnCommon):
         """
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        print(self.ngram_size)
-        print(dict_de_ngrams)
+        taille = TextAn.get_vector_size(dict_de_ngrams)
         norm_dict = {}
+        for bigram in dict_de_ngrams.keys():
+            norm_dict[bigram] = dict_de_ngrams[bigram] / taille
         return norm_dict
 
     @staticmethod
@@ -132,9 +134,13 @@ class TextAn(TextAnCommon):
         """
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        sum_dict = {}
-        print(dict1)
-        print(dict2)
+        sum_dict = dict1.copy()
+        for bigram in sum_dict.keys():
+            if bigram in dict2.keys():
+                sum_dict[bigram] += dict2[bigram]
+            else:
+                sum_dict[bigram] = 1
+
         return sum_dict
 
     @staticmethod
@@ -154,8 +160,11 @@ class TextAn(TextAnCommon):
 
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        print("\t", dict1, dict2)
-        dot_product = 1.0
+        dot_product = 0.0
+        for bigram in dict1.keys():
+            if bigram in dict2.keys():
+                prod = dict1[bigram] * dict2[bigram]
+                dot_product += prod
         return dot_product
 
     def find_author(self, oeuvre: str) -> list[tuple[str, float]]:
@@ -217,8 +226,19 @@ class TextAn(TextAnCommon):
         """
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        print("\t", self.ngram_size, auteur, ngram)
-        return 0
+        oeuvres = TextAnCommon.get_aut_files(self, auteur)
+        occurrences = 0
+        for oeuvre in oeuvres:
+            with open(oeuvre, "r", encoding="utf8") as file:
+                for line in file:
+                    line = line.strip()
+                    line = line.lower()
+                    words = line.split(" ")
+                    for word in words:
+                        if ngram in word:
+                            occurrences += 1
+
+        return occurrences
 
     def get_total_occurrences(self, auteur: str) -> int:
         """Retourne le nombre total d'occurrences de n-grammes pour cet auteur
@@ -237,8 +257,10 @@ class TextAn(TextAnCommon):
         """
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        print("\t", self.ngram_size, auteur)
-        return 1
+        occurrences = 0
+        for ngram in self.ngrams_auteurs[auteur].keys():
+            occurrences += self.get_ngram_occurrence(auteur, ngram)
+        return occurrences
 
     def gen_text_dict(self, auteur_dict: dict, taille: int, to_file: TextIO) -> None:
         """Après analyse des textes d'auteurs connus, produire un texte selon des statistiques d'un dictionnaire
