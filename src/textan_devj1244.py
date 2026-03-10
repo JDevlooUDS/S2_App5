@@ -37,7 +37,7 @@
 import io
 from typing import TextIO
 import math  # Au besoin, retirer le commentaire de cette ligne
-# import random # Au besoin, retirer le commentaire de cette ligne
+import random # Au besoin, retirer le commentaire de cette ligne
 from textan_common import TextAnCommon
 
 
@@ -67,7 +67,7 @@ class TextAn(TextAnCommon):
     """
 
     # Signes de ponctuation à traiter comme des mots (compléter cette liste incomplète)
-    PONC = ["!", ";"]
+    PONC = ["!", ";", ",", "'", "?", ".", "’", "»", "«", "-", "_", ":", "(", ")", "[", "]", "{", "}", '"', "…", "–"]
 
     # Ajouter les structures de données et les fonctions nécessaires à l'analyse des textes,
     # la production de textes aléatoires, la détection d'oeuvres inconnues,
@@ -78,6 +78,20 @@ class TextAn(TextAnCommon):
     #
     #  Note : Voir la documentation ReadTheDocs
     #
+
+    def split_lines(self, line: str) -> list[str]:
+        words = []
+        word = ""
+        for i in range(len(line)):
+            if line[i] == " " or line[i] in self.PONC or line[i] == "\t":
+                if word != "":
+                    words.append(word)
+                    word = ""
+                if line[i] in self.PONC:
+                    words.append(line[i])
+            else:
+                word += line[i]
+        return words
 
     @staticmethod
     def get_vector_size(dict_de_ngrams: dict) -> float:
@@ -135,8 +149,8 @@ class TextAn(TextAnCommon):
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
         sum_dict = dict1.copy()
-        for bigram in sum_dict.keys():
-            if bigram in dict2.keys():
+        for bigram in dict2.keys():
+            if bigram in sum_dict.keys():
                 sum_dict[bigram] += dict2[bigram]
             else:
                 sum_dict[bigram] = 1
@@ -181,23 +195,9 @@ class TextAn(TextAnCommon):
         """
         # La ligne suivante ne sert qu'à éliminer un avertissement.
         # Il faut la retirer lorsque le code est complété
-        print("\tAuteurs: ", self.auteurs, "\n\tOeuvre: ", oeuvre)
 
         # Exemple du format des sorties
-        resultats = [
-            ("Premier_auteur", 0.1234),
-            ("Deuxième_auteur", 0.1123),
-        ]
-
         # Exemple de lecture du fichier oeuvre une ligne à la fois.  Modifier ou remplacer ce code par le vôtre.
-        fichier_oeuvre = open(oeuvre, "r", encoding="utf8")
-        lignes = fichier_oeuvre.readlines()
-        plus_grande_ligne = ""
-        for ligne in lignes:
-            if len(ligne) > len(plus_grande_ligne):
-                plus_grande_ligne = ligne
-        print("\tPlus grande ligne: ", plus_grande_ligne.strip())
-
         # Ajouter votre code pour déterminer la proximité du fichier passé en paramètre avec chacun des auteurs
         # Retourner la liste des auteurs, chacun avec sa proximité au fichier inconnu
         # Plus la proximité est grande, plus proche l'oeuvre inconnue est des autres écrits d'un auteur
@@ -208,7 +208,19 @@ class TextAn(TextAnCommon):
         #   proximité = (A dot product B) / (|A| |B|)   où A est le vecteur du texte inconnu et B est celui d'un auteur,
         #           "dot product" est le produit scalaire, et |X| est la norme (longueur) du vecteur X.
         #   À la fin, le produit scalaire normalisé représente le cosinus de l'angle (oeuvre/auteur)
-
+        dict_ngram_inconnu = {}
+        self.compute_ngram_stats(dict_ngram_inconnu, oeuvre)
+        resultats = []
+        for auteur in self.auteurs:
+            dict_ngram_auteur = self.ngrams_auteurs[auteur]
+            prod_scal = self.dot_product_dict(dict_ngram_auteur, dict_ngram_inconnu)
+            size_vecteur_auteur = self.get_vector_size(dict_ngram_auteur)
+            size_vecteur_inconnu = self.get_vector_size(dict_ngram_inconnu)
+            cos_valeur = prod_scal/(size_vecteur_auteur * size_vecteur_inconnu)
+            if cos_valeur > 1:
+                cos_valeur = 1
+            res = (auteur, cos_valeur)
+            resultats.append(res)
         return resultats
 
     def get_ngram_occurrence(self, auteur: str, ngram) -> int:
@@ -226,19 +238,8 @@ class TextAn(TextAnCommon):
         """
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        oeuvres = TextAnCommon.get_aut_files(self, auteur)
-        occurrences = 0
-        for oeuvre in oeuvres:
-            with open(oeuvre, "r", encoding="utf8") as file:
-                for line in file:
-                    line = line.strip()
-                    line = line.lower()
-                    words = line.split(" ")
-                    for word in words:
-                        if ngram in word:
-                            occurrences += 1
-
-        return occurrences
+        dict_ngrams = self.ngrams_auteurs[auteur]
+        return dict_ngrams[ngram]
 
     def get_total_occurrences(self, auteur: str) -> int:
         """Retourne le nombre total d'occurrences de n-grammes pour cet auteur
@@ -276,7 +277,39 @@ class TextAn(TextAnCommon):
         """
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        print(self.ngram_size, auteur_dict, taille, file=to_file)
+        ngrams = list(auteur_dict.keys())
+        prefixes = {}
+        for ngram in ngrams:
+            prefix = (ngram[0], ngram[1])
+            if prefix not in prefixes:
+                prefixes[prefix] = [ngram[3]]
+            else:
+                prefixes[prefix].append(ngram[3])
+        words = []
+        premier_ngram = ngrams[0]
+        word1 = premier_ngram[0]
+        word2 = premier_ngram[1]
+        words.append(word1)
+        words.append(" ")
+        words.append(word2)
+        prefixes_keys = list(prefixes.keys())
+        for i in range(taille - 2):
+            word3 = ""
+            previous = (word1, word2)
+
+            if previous in prefixes:
+                word3 = random.choice(prefixes[previous])
+            else:
+                prefix = random.choice(prefixes_keys)
+                word2 = prefix[1]
+                word3 = random.choice(prefixes[prefix])
+            words.append(" ")
+            words.append(word3)
+            word1 = word2
+            word2 = word3
+
+        text = "".join(words)
+        print(text, file=to_file)
         return
 
     def get_kth_element(self, auteur: str, k: int) -> list[list[str]]:
@@ -292,11 +325,25 @@ class TextAn(TextAnCommon):
             ngram (List[Liste[string]]) : Liste de listes de mots composant le n-gramme recherché
             (il est possible qu'il y ait plus d'un n-gramme au même rang)
         """
-        # Les lignes suivantes ne servent qu'à éliminer un avertissement.
-        # Il faut les retirer lorsque le code est complété
-        print("\t", self.auteurs, auteur, k)
-        ngram = [["un", "roman"], ["le", "lac"], ["code", "est"]]  # Exemple du format de sortie pour trois bigrammes
-        return ngram
+
+        list = []
+        ngrams = self.ngrams_auteurs[auteur]
+        values = [ngrams[val] for val in ngrams.keys()]
+        values.sort(reverse=True)
+        lastSize = values[0]
+        count = 0
+        kth_occurrences = 0
+        for val in values:
+            if val < lastSize:
+                count += 1
+                lastSize = val
+                if count == k:
+                    kth_occurrences = val
+                    break
+        for ngram in ngrams.keys():
+            if ngrams[ngram] == kth_occurrences:
+                list.append(ngram)
+        return list
 
     def get_text_size(self, oeuvre: str) -> int:
         """Calcule le nombre de mots dans une oeuvre
@@ -309,7 +356,16 @@ class TextAn(TextAnCommon):
             Note: les signes de ponctuation sont considérés des mots
         """
         word_number = 0
-        print(self.auteurs, oeuvre)
+        fichier = open(oeuvre, "r", encoding="utf-8")
+        lines = fichier.readlines()
+        for line in lines:
+            line = line.strip()
+            line = line.lower()
+            words = self.split_lines(line)
+            for word in words:
+                if word != "":
+                    word_number += 1
+        fichier.close()
         return word_number
 
     def compute_ngram_stats(self, dict_de_ngrams: dict, oeuvre: str) -> None:
@@ -326,15 +382,32 @@ class TextAn(TextAnCommon):
 
         fichier_oeuvre = open(oeuvre, "r", encoding="utf8")
         lignes = fichier_oeuvre.readlines()
-        for ligne in lignes:
+        n = self.ngram_size
+        wordList = []
+        count = 0
+        for line in lignes:
+            line = line.strip()
+            line = line.lower()
+            words = self.split_lines(line)
+            for word in words:
+                if count < n:
+                    wordList.append(word)
+                    count += 1
+                else:
+                    ngram = tuple(wordList)
+                    if ngram in dict_de_ngrams:
+                        dict_de_ngrams[ngram] += 1
+                    else:
+                        dict_de_ngrams[ngram] = 1
+                    wordList.pop(0)
+                    count -= 1
+
             # Traiter tous les mots de la ligne
             # Regrouper les mots en n-grammes (avec une fenêtre glissante)
             # Considérer que les espaces, tabulations et retours de chariot sont des séparateurs entre les mots
             # Mettre à jour dans le dictionnaire dict_de_ngrams avec le nombre d'occurrences des n-grammes trouvés
             # Les print qui suivent ne sont présents uniquement pour éliminer des avertissements
             # Les variables ligne et self devraient être utiles pour votre code
-            print(ligne)
-            print(self)
         fichier_oeuvre.close()
         return
 
@@ -367,9 +440,6 @@ class TextAn(TextAnCommon):
         #   Le dictionnaire de chacun des auteurs doit être ajouté à self.ngrams_auteurs, avec l'auteur comme clé
 
         # Ces trois lignes ne servent qu'à éliminer un avertissement. Il faut les retirer lorsque le code est complété
-        ngram = self.get_empty_ngram(2)
-        print("\t", ngram)
-        print("\t", self.auteurs)
 
         # Le code qui suit indique comment accéder aux noms des fichiers qui contiennent les oeuvres des auteurs.
         # Vous pouvez l'adapter pour effectuer l'analyse
@@ -383,7 +453,7 @@ class TextAn(TextAnCommon):
         for auteur in self.auteurs:
             oeuvres = self.get_aut_files(auteur)
             for oeuvre in oeuvres:
-                print("\t", oeuvre)
+                self.compute_ngram_stats(self.ngrams_auteurs[auteur], oeuvre)
         return
 
     def __init__(self) -> None:
