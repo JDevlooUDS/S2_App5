@@ -279,34 +279,36 @@ class TextAn(TextAnCommon):
         # Il faut les retirer et les remplacer par du code fonctionnel
         ngrams = list(auteur_dict.keys())
         prefixes = {}
-        for ngram in ngrams:
-            prefix = (ngram[0], ngram[1])
-            if prefix not in prefixes:
-                prefixes[prefix] = [ngram[3]]
-            else:
-                prefixes[prefix].append(ngram[3])
-        words = []
-        premier_ngram = ngrams[0]
-        word1 = premier_ngram[0]
-        word2 = premier_ngram[1]
-        words.append(word1)
-        words.append(" ")
-        words.append(word2)
-        prefixes_keys = list(prefixes.keys())
-        for i in range(taille - 2):
-            word3 = ""
-            previous = (word1, word2)
 
-            if previous in prefixes:
-                word3 = random.choice(prefixes[previous])
+        for ngram in ngrams:
+            prefix = ngram[:-1]
+            if prefix not in prefixes:
+                prefixes[prefix] = [ngram[self.ngram_size - 1]]
+            else:
+                prefixes[prefix].append(ngram[self.ngram_size - 1])
+
+        words = []
+        prefixes_keys = list(prefixes.keys())
+
+        first_prefix = random.choice(prefixes_keys)
+        for i in range(self.ngram_size - 1):
+            words.append(" ")
+            words.append(first_prefix[i])
+
+        last_prefix = list(first_prefix)
+        for i in range(taille - (self.ngram_size + 1)):
+            word3 = ""
+            last_prefix_tuple = tuple(last_prefix)
+            if last_prefix_tuple in prefixes:
+                word3 = random.choice(prefixes[last_prefix_tuple])
             else:
                 prefix = random.choice(prefixes_keys)
-                word2 = prefix[1]
                 word3 = random.choice(prefixes[prefix])
+                last_prefix = list(prefix)
             words.append(" ")
             words.append(word3)
-            word1 = word2
-            word2 = word3
+            last_prefix.pop(0)
+            last_prefix.append(word3)
 
         text = "".join(words)
         print(text, file=to_file)

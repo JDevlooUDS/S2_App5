@@ -1,31 +1,31 @@
 >>>------------>>> devj1244 <<<----------------<<<
 	Tentative de chargement du code textan_devj1244.py
-	Chargement réussi en 0.08 secondes
+	Chargement réussi en 0.06 secondes
 
 	Appel de la méthode Textan.analyze(): Extraction des n-grammes
-	Analyse terminée en 16.81 secondes
+	Analyse terminée en 16.25 secondes
 
 	Appel de la méthode Textan.gen_text_dict(): Création de texte aléatoire suivant le style d'un auteur: Génération d'un texte aléatoire
 	cip:  devj1244 - Création de texte aléatoire, vérification à l'aide du code de devj1244
-	╒══════════╤════════╤══════════════════════════╤══════════╤═════════╤════════════╤═══════════╤══════════╤═══════════╤══════════════╕
-	│ Auteur   │   Mots │ Fichier généré           │ Vérif    │   Vérif │      Vérif │     Vérif │    Vérif │     Vérif │        Vérif │
-	│          │        │                          │ Auteur   │    Mots │   Ngrammes │   Score Z │     Prox │   Moyenne │   Écart type │
-	│          │        │                          │          │         │   Inconnus │           │          │           │              │
-	│          │        │                          │          │         │        (%) │           │          │           │              │
-	╞══════════╪════════╪══════════════════════════╪══════════╪═════════╪════════════╪═══════════╪══════════╪═══════════╪══════════════╡
-	│ Balzac   │  10000 │ _devj1244_Balzac_2026... │ Hugo     │    9580 │      99.29 │      2.14 │ 0.01     │ 0.004602  │    0.002764  │
-	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼──────────┼───────────┼──────────────┤
-	│ Hugo     │  10000 │ _devj1244_Hugo_2026-0... │ Hugo     │    9607 │      99.22 │      1.04 │ 0.000555 │ 0.0004234 │    0.0001256 │
-	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼──────────┼───────────┼──────────────┤
-	│ Se╠ügur  │  10000 │ _devj1244_Se╠ügur_202... │ Zola     │    9645 │      99.54 │      2.08 │ 0.00222  │ 0.00127   │    0.0004588 │
-	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼──────────┼───────────┼──────────────┤
-	│ Verne    │  10000 │ _devj1244_Verne_2026-... │ Hugo     │    9611 │      99.33 │      1.14 │ 0.00205  │ 0.001559  │    0.0004343 │
-	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼──────────┼───────────┼──────────────┤
-	│ Voltaire │  10000 │ _devj1244_Voltaire_20... │ Zola     │    9611 │      99.81 │      2    │ 0.00268  │ 0.001216  │    0.0007314 │
-	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼──────────┼───────────┼──────────────┤
-	│ Zola     │  10000 │ _devj1244_Zola_2026-0... │ Hugo     │    9625 │      98.48 │      2.01 │ 0.00673  │ 0.00369   │    0.00151   │
-	╘══════════╧════════╧══════════════════════════╧══════════╧═════════╧════════════╧═══════════╧══════════╧═══════════╧══════════════╛
-	Génération de texte terminée en 12.45 secondes
+	╒══════════╤════════╤══════════════════════════╤══════════╤═════════╤════════════╤═══════════╤═════════╤═══════════╤══════════════╕
+	│ Auteur   │   Mots │ Fichier généré           │ Vérif    │   Vérif │      Vérif │     Vérif │   Vérif │     Vérif │        Vérif │
+	│          │        │                          │ Auteur   │    Mots │   Ngrammes │   Score Z │    Prox │   Moyenne │   Écart type │
+	│          │        │                          │          │         │   Inconnus │           │         │           │              │
+	│          │        │                          │          │         │        (%) │           │         │           │              │
+	╞══════════╪════════╪══════════════════════════╪══════════╪═════════╪════════════╪═══════════╪═════════╪═══════════╪══════════════╡
+	│ Balzac   │  10000 │ _devj1244_Balzac_2026... │ Hugo     │    9573 │      99.14 │      2.03 │ 0.01    │  0.006865 │    0.002711  │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Hugo     │  10000 │ _devj1244_Hugo_2026-0... │ Zola     │    9594 │      99.31 │      1.14 │ 0.00157 │  0.001126 │    0.0003914 │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Se╠ügur  │  10000 │ _devj1244_Se╠ügur_202... │ Zola     │    9622 │      99.39 │      1.97 │ 0.00427 │  0.002298 │    0.001002  │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Verne    │  10000 │ _devj1244_Verne_2026-... │ Zola     │    9588 │      98.81 │      1.51 │ 0.00553 │  0.003301 │    0.001475  │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Voltaire │  10000 │ _devj1244_Voltaire_20... │ Zola     │    9593 │      99.73 │      1.68 │ 0.00236 │  0.001517 │    0.0005001 │
+	├──────────┼────────┼──────────────────────────┼──────────┼─────────┼────────────┼───────────┼─────────┼───────────┼──────────────┤
+	│ Zola     │  10000 │ _devj1244_Zola_2026-0... │ Zola     │    9620 │      98.23 │      1.99 │ 0.00446 │  0.002593 │    0.0009402 │
+	╘══════════╧════════╧══════════════════════════╧══════════╧═════════╧════════════╧═══════════╧═════════╧═══════════╧══════════════╛
+	Génération de texte terminée en 10.96 secondes
 
 	Appel de la méthode Textan.find(): Détection d'un auteur inconnu
 	cip: devj1244 - Calcul des fréquences (et auteurs possibles) pour une ou plusieurs oeuvres inconnues
@@ -52,7 +52,7 @@
 	│ Inconnu_6.txt     │ Zola :       │ Balzac :     │ Hugo :       │ Se╠ügur :    │ Verne :      │ Voltaire :   │
 	│                   │  2.06        │  0.21        │  -0.18       │  -0.49       │  -0.52       │  -1.08       │
 	╘═══════════════════╧══════════════╧══════════════╧══════════════╧══════════════╧══════════════╧══════════════╛
-	Fin du calcul de détection d'auteur inconnu en 6.94 secondes
+	Fin du calcul de détection d'auteur inconnu en 7.28 secondes
 
 	Appel de la méthode Textan.get_kth_ngram(): Détection du k-ième n-gramme le plus fréquent
 	cip: devj1244 - Calcul du 25e 4-gramme le plus fréquent
@@ -71,7 +71,7 @@
 	├──────────┼────────────────┼─────────────────────────────┼─────────────┤
 	│ Zola     │              9 │ ('un', 'de', '.', '-')      │ 4.32E-03 %  │
 	╘══════════╧════════════════╧═════════════════════════════╧═════════════╛
-	Fin du calcul du 25-ième 4-gramme le plus fréquent en 1.72 secondes
+	Fin du calcul du 25-ième 4-gramme le plus fréquent en 1.40 secondes
 
 	Appel de la méthode Textan.print_auteur_distance(): Calcule le cosinus de l'angle entre les vecteurs des auteurs
 	cip: devj1244 - Comparaison des auteurs:
@@ -92,8 +92,8 @@
 	╘══════════╧══════════╧════════╧═══════════╧═════════╧════════════╧════════╛
 	Auteurs les plus proches (2.04E-01): Balzac, Zola
 	Auteurs les plus lointains (3.93E-02): Se╠ügur, Voltaire
-	Fin du calcul de proximité entre les auteurs en 2.54 secondes
+	Fin du calcul de proximité entre les auteurs en 2.16 secondes
 
 	Appel de la méthode Textan.get_total_execution_time(): Calcule et imprime le temps d'exécution total
-	cip: devj1244 - Temps d'exécution total: 40.46 secondes
+	cip: devj1244 - Temps d'exécution total: 38.05 secondes
 
